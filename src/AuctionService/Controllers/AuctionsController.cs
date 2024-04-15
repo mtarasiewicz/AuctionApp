@@ -27,7 +27,7 @@ public class AuctionsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions(string date)
         => await _repo.GetAuctionsAsync(date);
-    [HttpGet("{id:guid}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<AuctionDto>> GetAuctionById(Guid id)
     {
         var auction = await _repo.GetAuctionByIdAsync(id);
@@ -57,7 +57,7 @@ public class AuctionsController : ControllerBase
         return CreatedAtAction(nameof(GetAuctionById), new { auction.Id }, newAuction);
     }
     [Authorize]
-    [HttpPut("{id:guid}")]
+    [HttpPut("{id}")]
     public async Task<ActionResult> UpdateAuction(Guid id, UpdateAuctionDto updateAuctionDto)
     {
         var auction = await _repo.GetAuctionEntityById(id);
@@ -82,7 +82,7 @@ public class AuctionsController : ControllerBase
 
     }
     [Authorize]
-    [HttpDelete("{id:guid}")]
+    [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteAuction(Guid id)
     {
         var auction = await _repo.GetAuctionEntityById(id);
